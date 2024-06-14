@@ -282,3 +282,40 @@ syntax : useState(초기값)
     ** useEffect 안에서 객체 타입 state를 setState 하는 경우 무한 루프에 빠질 수 있는데 이 때 해결 방안
         https:/kinsta.com/knowledgebase/react-hook-useeffect-has-a-missing-dependency/
 
+## custom Hooks 만들기
+
+
+## React 스타일링    
+    1. 태그에 직접 지정하기
+        - 태그에 직접 디자인을 적용할 때는 {}로 묶고
+            CSS 속성 중 - 은 카멜 표기법으로 대체
+    2. 일반 CSS 파일 적용
+        - import './App.css'
+    3. CSS 모듈로 적용(비권장)
+        - component명.module.css 형식으로 작성
+        - 선택자에 고유한 해시값을 부여해서 다른 파일과의 디자인 중복을 막아줌
+        - :global 키워드를 이용해 전역 선택자(이름) 선언이 가능
+    4. public 폴더에 CSS디자인
+
+[CSS 파일 이름 규칙]
+의 이름을 반드시 포함해 만드는 것을 추천
+
+## Sass(Syntatically Awemsome Style Sheet))
+     Css pre-processer로 sass와 scss 확장자 사용
+      
+
+
+## styled-components
+    JS 안에 CSS를 작성하는 기술 인기있는 library emotion과 styled-jsx가 있음
+
+    styled-components : https://styled-components.com/
+    emotion : https://github.com/emotion-js/emotion
+    styled-jsx : https://github.com/vercel/styled-jsx
+    
+## Tagged Template Literal
+    (https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals)
+    styled-components가 내부적으로 어떻게 동작하는지 이해하는 데 도움됨
+
+    const name = 'react';
+    const message = `hello ${name}`;
+    console.log(message);

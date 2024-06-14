@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "loadsh": "^0.0.4"
+    "loadsh": "^0.0.4",
+    "node-sass": "^9.0.0",
+    "styled-components": "^6.1.11"
   }
 }

@@ -1,0 +1,15 @@
+/* Box.module.css : CSS Module component 단위별 스타일링(중첩 방지)*/
+/* 
+    레거시 프로젝트에 React를 도입할 때 기존 프로젝트에 있는 CSS 클래스와 이름이 중복되어도 OK 
+    CSS 클래스를 중복되지 않게 작성하기 위해 CSS 클래스 네이밍 규칙(하기 내용)을 따르지 않아도 됨
+
+    ** CSS 클래스 네이밍 규칙
+    1. component의 이름은 다른 컴포넌트와 중복되지 않게 한다
+    2. component의 최상단 CSS클래스는 component의 이름과 일치해야함
+    3. component 내부에서 보여지는 CSS 클래스는 CSSselector를 활용
+*/
+.Box {
+    background: black;
+    color: white;
+    padding: 2rem;
+}

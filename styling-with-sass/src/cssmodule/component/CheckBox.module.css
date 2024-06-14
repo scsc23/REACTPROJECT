@@ -1,0 +1,60 @@
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox label {
+    cursor: pointer;
+}
+
+/* 실제 input을 숨기기 위한 코드 */
+.checkbox input {
+    /* display: none; */
+    width: 0;
+    height: 0;
+    position: absolute;
+    opacity: 0;
+}
+
+.checkbox span {
+    font-size: 1.125;
+    font-weight: 500;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    /* 아이콘의 크기는 font size로 조절 가능 */
+    font-size: 2rem;
+    margin-right: 0.25;
+    color: #abd5db;
+}
+
+.checked {
+    color: #339af0;
+}
+
+/*
+    CSS Module는 Sass에도 적용 가능
+    확장자를 component.module.scss로 변경
+    :global(전역) >> 클래스의 이름을 고유화하지 않고 그대로 사용
+
+    sass 경우
+    :global {
+        /선택자 {
+
+        }
+    }   
+
+CSS module을 사용하지 않는 곳에서 특정 class 에서만 고유 이름 사용
+    :local-link {
+}
+
+sass 사용 경우
+    :local {
+        .선택자 {
+
+        }
+    }
+*/
+
