@@ -3,7 +3,7 @@ import './App.css';
 import CreateUser from './Hooks/CreateUser';
 import useInputs from './Hooks/UseInputs';
 import UserList from './Hooks/UserList';
-import { useCallback, useMemo, useReducer, useRef } from 'react';
+import React, { createContext, useCallback, useMemo, useReducer, useRef } from 'react';
 import styled from './css/App.module.css'; // css 모듈 디자인
 
 function countActiveUsers(users) {
@@ -54,11 +54,13 @@ function reducer(state, action) {
         users: state.users.filter(user => user.id !== action.id)
       };
     default:
-      return state;
-
-      
+      return state;      
   }
 }
+
+// UserDispatch 이름으로 Context 내보내기
+export const UserDispatch = createContext(null);
+// 내보낸 Context를 사용하고 싶은 경우 import { UserDispatch } from './App';
 
 function App() {
   
@@ -94,34 +96,37 @@ function App() {
     nextId.current += 1;
   }, [username, email, reset]);
 
-  const onToggle = useCallback(id => {
-    dispatch({
-      type: 'TOGGLE_USER',
-      id
-    });
-  }, []);
+  // ContextAPI를 사용하기 위해 주석 처리
+  // const onToggle = useCallback(id => {
+  //   dispatch({
+  //     type: 'TOGGLE_USER',
+  //     id
+  //   });
+  // }, []);
 
-  const onRemove = useCallback(id => {
-    dispatch({
-      type: 'REMOVE_USER',
-      id
-    })
-  }, []);
+  // const onRemove = useCallback(id => {
+  //   dispatch({
+  //     type: 'REMOVE_USER',
+  //     id
+  //   })
+  // }, []);
 
   const count = useMemo(() => countActiveUsers(users), [users])
 
   return (
-    <>
-      <section className={styled.app_wrap}>
+    <UserDispatch.Provider value={dispatch}> 
+    {/* const [state, dispatch] = useReducer(reducer, initialState); 에 dispatch 를 의미함 */}
+      {/* <section className={styled.app_wrap}>
         <p className='title'>CSS 모듈 디자인</p>
       </section>      
       <br />
-      <hr />
+      <hr /> */}
       {/* <Counter /> */}
+
       <CreateUser username={username} email={email} onChange={onChange} onCreate={onCreate} />
-      <UserList users={users} onToggle={onToggle} onRemove={onRemove}/>
+      <UserList users={users}/>
       <div>활성 사용자 수 : {count}</div>
-    </>
+    </UserDispatch.Provider>
   );
 }
 

@@ -319,3 +319,12 @@ syntax : useState(초기값)
     const name = 'react';
     const message = `hello ${name}`;
     console.log(message);
+
+## ContextAPI를 이용한 전역 값 관리
+    React의 ContextAPI는 프로젝트 안에서 전역적으로 사용할 수 있는 값을 관리함
+    ContextAPI를 사용하기 위해 Context를 만드는 방법
+        1. React.createContext() 함수 사용
+            > const UserDispatch = React.createContext(null);
+        2. Context안의 Provider component를 통해 Context의 값을 정할 수 있음
+            > <UserDispatch.Provider value={UserDispatch}> ... </UserDispatch>
+           Provider로 감싸인 Component중 어디서든 Context의 값을 바로 조회해서 사용 가능 
