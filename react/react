@@ -328,3 +328,25 @@ syntax : useState(초기값)
         2. Context안의 Provider component를 통해 Context의 값을 정할 수 있음
             > <UserDispatch.Provider value={UserDispatch}> ... </UserDispatch>
            Provider로 감싸인 Component중 어디서든 Context의 값을 바로 조회해서 사용 가능 
+
+
+    1. TodoTemplate => 레이아웃 설정 component
+    2. TodoHead     => 오늘의 날짜, 요일과 할 일이 몇 개 남았는지 표시
+    3. TodoList     => 할 일 정보가 들어있는 Todos 배열 내장 함수(TodoItem이 들어있음)
+    4. TodoItem     => 각 할 일에 대한 정보를 rendering하는 component 완료 여부 삭제 효과
+    5. TodoCreate   => 새로운 할 일 등록을 위한 component
+
+## ContextAPI 사용방법
+    1. createContext() 생성
+    2. 자식 component에서 Consumer를 이용해 데이터 받기
+    3. 부모 component에서 Provider를 사용하여 value값 제어
+
+    Provider와 Consumer를 독립적으로 분리하기
+        - ContextAPI는 전역으로 사용할 값이기 때문에 파일을 분리해서 생성
+        - 하위 Component에서는 Hook을 이용해 편리하게 사용이 가능
+            > useContext() 는 component에서 ContextAPI를 편하게 사용할 수 있게 해주는 Hook
+            > return타입은 객체이고 첫 번째는 status값, 두 번째는 값을 저장하는 setter
+            > ex) const {state, action} = useContext(ContextAPI객체)
+            > createContext로 생성
+            > 감싸기
+            > useContext Hook으로 사용하기
