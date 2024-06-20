@@ -20,7 +20,7 @@ const A = () => {
             <input type='text' ref={input1} />
             <input type='text' ref={input2} />
             <button onClick={handleClick}>데이터 변경</button>
-
+            
             <div>
                 {state.id}<br />
                 {state.name}<br />

@@ -266,7 +266,7 @@ syntax : useState(초기값)
                                 useEffect(() => {console.log("componentDidMount")}, []) << component 등록 시 여기서 비어있는 배열 부분을 한번 실행
 
     - updating : component가 update되는 시점에 어떤 생명주기 method들이 호출되는지 알아봅니다
-        > getDerivedStateFromProps : compoennt의 props나 state가 변경
+        > getDerivedStateFromProps : component의 props나 state가 변경
         > shouldComponentUpdate : component의 re-rendering 여부 결정
         > componentDidUpdate : component가 update 된 후 발생, useEffect() 동작 의존성 배열이 변할 때 실행하는 것과 같다
                                 useEffect(() => {console.log("count or exampleProp changed")}, [count, exampleProp])
@@ -346,7 +346,78 @@ syntax : useState(초기값)
         - 하위 Component에서는 Hook을 이용해 편리하게 사용이 가능
             > useContext() 는 component에서 ContextAPI를 편하게 사용할 수 있게 해주는 Hook
             > return타입은 객체이고 첫 번째는 status값, 두 번째는 값을 저장하는 setter
-            > ex) const {state, action} = useContext(ContextAPI객체)
+            > ex) const{state, action} = useContext(ContextAPI객체)
             > createContext로 생성
             > 감싸기
             > useContext Hook으로 사용하기
+
+## React Router
+
+    - SPA(Single Page Application)
+        1. 단점
+            > 앱의 규모가 커지면 JS파일도 커져서 로딩이 오래 걸림
+            > 브라우저에서 rendering이 완료되기 전 까지는 빈 화면 표시
+            > 규모가 큰 Application은 SSR방식으로 처리(웹팩 설정)
+    
+        2. Routing
+            > 브라우저의 주소 상태에 따라 다른 화면을 보여주도록 처리
+            > create-react-app로 프로젝트를 생성하게 되면 기본적으로 SPA에 CSR
+            > 하나의 페이지를 사용하지만 React Router를 통해 여러 페이지가 존재하는 것 처럼 사용
+    
+    1. 프로젝트 생성 : router-tutorial
+    2. 라우터 설치 : react-router-dom
+                    npm install react-router-dom
+                    yarn add react-router-dom
+    3. 라우터 적용하기
+        - 라우터를 사용할 때에는 index.js에 App Component를 <BrowserRouter>로 감싸줌
+        - Page Component를 만들고 App Component에서 <Routes>를 사용해서 분기 처리
+
+    - 쿼리 스트링 or URL 파라미터 
+        같은 component에 전달되는 데이터에 따라 다른 내용을 보여줘야 할 경우
+
+        ex) 사용자 정보, 게시글의 상세 내용
+
+        이 때 URL 주소의 매개변수를 전달할 수 있고, component는 받아서 사용
+
+        1. 쿼리 스트링
+            - 쿼리스트링은 주소의 ? 뒤에 키=값 형태로 넘기는 매개값
+            - 별도의 라우터 설정은 필요없음
+            - 컴포넌트에서 useLocation() 또는 useSearchParams()을 사용해 쿼리스트링을 받을 수 있음
+
+        2. URL 파라미터
+            - 주소 뒤에 /경로/값/값 형태로 매개값을 넘김
+            - Route에 추가적 설정이 필요함 /주소/:key
+            - component에서는 useParams() 사용 URL parameter를 받음
+
+    - 중첩 Route로 공통 부분 처리하기
+        > <Route path='/board' element={<Board />} />
+          <Route path='/board/:num' element={<BoardContent />} />
+        > 위 설정으로 Route가 달리 설정되기 때문에 각각 다른 화면을 보여줌
+        > 만약 Board 목록 페이지(Board.js)를 공통으로 사용하고 상세 페이지를 서브로 보여주고 싶은 경우
+            중첩 Route를 적용해서 부모 component에서 <Outlet> component로 하위 Route를 보여줌
+            <Routes>
+                <Route path='/board' element={<Board />} />
+                    <Route path=':num' element={<BoardContent />} />
+                </Route>
+            </Routes>
+
+    - Router의 부가적인 기능
+        1. NavLink Component
+        2. useNavigate()
+        3. Navigate Component
+
+## NavLink Component
+    1. NavLink Component
+        - Link와 Router의 경로가 일치하면 특정 style을 적용
+        - style 속성을 제공하고 실행시킬 함수를 작성
+        - 이 함수의 매개변수로 {isActive: boolean} 객체를 넣어주고 활성화 여부 표시
+        - {isActive} 변수로 구조분해 할당
+    
+    2. useNavigate() (history객체(v5)를 대신)
+        - JS의 history객체를 대신하며 특정 이벤트 발생 시 url을 조작할 수 있는 함수 제공
+        - React v6에서 useHistory가 변화한 것
+        - let Navigator = useNavigate();
+    
+    3. navigate Component
+        - <Navigate> Component는 rendering될 때 현재 위치를 변경
+        - useNavigate()와 달리 rendering 과정에 사용할 수 있음
