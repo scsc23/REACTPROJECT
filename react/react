@@ -421,3 +421,15 @@ syntax : useState(초기값)
     3. navigate Component
         - <Navigate> Component는 rendering될 때 현재 위치를 변경
         - useNavigate()와 달리 rendering 과정에 사용할 수 있음
+
+target : ES 버전 선택
+module : compile된 코드가 어떤 모듈에서 실행될지 정의
+strict : 모든 타입 체크인 옵션
+esModuleIneterop : commonJS 모듈 형태로 이루어진 파일을 es2015 모듈 형태로 불러줌
+
+React.FC 사용 시 특징
+    1. children 값이 props에 기본적으로 들어감
+    2. defaultProps, propTypes, contextTypes 등 설정 시 자동완성 처리
+    3. children이 optional로 들어가 있는 상황에서 props 타입이 명확하지 않음
+    4. React.FC 사용 시 Props 타입 안에 children 설정해야함
+    5. defaultProps가 제대로 동작하지 않음
